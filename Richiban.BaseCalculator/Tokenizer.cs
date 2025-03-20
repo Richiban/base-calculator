@@ -5,12 +5,12 @@ public class Tokenizer
     public Token[] Tokenize(string input)
     {
         var tokens = input
-            .Split(" ")
+            .Split(" ", StringSplitOptions.RemoveEmptyEntries)
             .Select(
                 token => token switch
                 {
-                    "+" or "-" or "*" or "/" => (Token)new Token.Op(token),
-                    var t => new Token.Other(t)
+                    [var c] when !char.IsLetterOrDigit(c) => (Token)new Token.Op(c.ToString()),
+                    var t => new Token.Literal(t)
                 })
             .ToArray();
 

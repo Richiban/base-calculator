@@ -6,5 +6,5 @@ public abstract record Token
 
     public sealed record Op(string Operator) : Token;
 
-    public sealed record Other(string Value) : Token;
+    public sealed record Literal(string Value) : Token;
 }
